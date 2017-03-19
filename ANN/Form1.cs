@@ -7,7 +7,7 @@ namespace ANN
 {
     public partial class Form1 : Form
     {
-        public PictureBox[] Finger;
+        public PictureBox[] Finger = new PictureBox[486];
 
         public Form1()
         {
@@ -208,16 +208,7 @@ namespace ANN
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Finger = new PictureBox[486];
-
-            DrawFinger(00, 9, 330, 14);
-            DrawFinger(84, 9, 489, 13);
-
-            DrawFinger(162, 80, 330, 14);
-            DrawFinger(246, 80, 489, 13);
-
-            DrawFinger(324, 151, 330, 14);
-            DrawFinger(408, 151, 489, 13);
+            DrawFinger();
         }
     }
 }

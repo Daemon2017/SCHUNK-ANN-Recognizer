@@ -10,6 +10,8 @@ namespace ANN
 {
     public partial class Form1 : Form
     {
+        double[] sensorSampleNew = new double[486];
+
         double[] sensorSample;
 
         void save(string fileName, double[][] variable)
@@ -84,14 +86,18 @@ namespace ANN
             }
         }
 
-        void DrawFinger(int PictureNumber, int StartCoordX, int StartCoordY, int i_end)
+        void DrawFinger()
         {
+            int StartCoordX = 9;
+            int PictureNumber = 0;
+            int StartCoordY = 425;
+
             int SizeX = 10,
                 SizeY = 10;
 
-            for (int i = 0; i < i_end; i++)
+            for (int i = 0; i < 27; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < 18; j++)
                 {
                     Finger[PictureNumber] = new PictureBox();
                     Finger[PictureNumber].Location = new Point(StartCoordX + j * SizeX + j,
@@ -107,9 +113,9 @@ namespace ANN
             }
         }
 
-        void UpdateFinger(int i_start, int i_end)
+        void UpdateFinger()
         {
-            for (int i = i_start; i < i_end; i++)
+            for (int i = 0; i < 486; i++)
             {
                 double ColorNormalization = sensorSample[i] * 255 / 4000;
 
@@ -117,6 +123,14 @@ namespace ANN
 
                 Finger[i].Invalidate();
                 Finger[i].Update();
+            }
+        }
+
+        void transformData(int i_start, int corrector)
+        {
+            for (int i = i_start; i < i_start + 6; i++)
+            {
+                sensorSampleNew[i] = sensorSample[i - corrector];
             }
         }
 
@@ -158,12 +172,25 @@ namespace ANN
                         sensorSample[i] = double.Parse(massive[i]);
                     }
 
-                    UpdateFinger(0, 84);
-                    UpdateFinger(84, 162);
-                    UpdateFinger(162, 246);
-                    UpdateFinger(246, 324);
-                    UpdateFinger(324, 408);
-                    UpdateFinger(408, 486);
+                    for (int i = 0, i_start = 0, corrector = 0; i < 26; i++, i_start += 18, corrector += 12)
+                    {
+                        transformData(i_start, corrector);
+                    }
+
+                    for (int i = 0, i_start = 6, corrector = -156; i < 26; i++, i_start += 18, corrector += 12)
+                    {
+                        transformData(i_start, corrector);
+                    }
+
+                    for (int i = 0, i_start = 12, corrector = -312; i < 26; i++, i_start += 18, corrector += 12)
+                    {
+                        transformData(i_start, corrector);
+                    }
+
+                    sensorSample = sensorSampleNew;
+                    sensorSampleNew = null;
+
+                    UpdateFinger();
 
                     for (int i = 0; i < sensorSample.Length; i++)
                     {
@@ -181,7 +208,7 @@ namespace ANN
 
                     for (int i = 0; i < anglesSample.Length; i++)
                     {
-                        sensorSample[486 + i] = anglesSample[i] / 92.0;
+                        sensorSample[486 + i] = anglesSample[i] / 95.0;
                     }
                     break;
 
