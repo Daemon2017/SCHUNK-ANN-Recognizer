@@ -1,6 +1,6 @@
 ﻿namespace ANN
 {
-    partial class Form1
+    partial class SchunkANN
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,68 +29,70 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.RecognizeSchunkBtn = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ResultsSchunkTxtBox = new System.Windows.Forms.TextBox();
+            this.ResultSchunkPicBox = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.RecognizeKukaBtn = new System.Windows.Forms.Button();
+            this.ResultsKukaTxtBox = new System.Windows.Forms.TextBox();
+            this.ClearSchunkBtn = new System.Windows.Forms.Button();
+            this.ClearKukaBtn = new System.Windows.Forms.Button();
+            this.InputsSchunkBtn = new System.Windows.Forms.Button();
+            this.OutputsSchunkBtn = new System.Windows.Forms.Button();
+            this.NamesSchunkBtn = new System.Windows.Forms.Button();
+            this.NamesKukaBtn = new System.Windows.Forms.Button();
+            this.OutputsKukaBtn = new System.Windows.Forms.Button();
+            this.InputsKukaBtn = new System.Windows.Forms.Button();
+            this.TeachSchunkBtn = new System.Windows.Forms.Button();
+            this.TeachKukaBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultSchunkPicBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // RecognizeSchunkBtn
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(0, 236);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(188, 37);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Распознать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.RecognizeSchunkBtn.Enabled = false;
+            this.RecognizeSchunkBtn.Location = new System.Drawing.Point(0, 236);
+            this.RecognizeSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.RecognizeSchunkBtn.Name = "RecognizeSchunkBtn";
+            this.RecognizeSchunkBtn.Size = new System.Drawing.Size(188, 37);
+            this.RecognizeSchunkBtn.TabIndex = 4;
+            this.RecognizeSchunkBtn.Text = "Распознать";
+            this.RecognizeSchunkBtn.UseVisualStyleBackColor = true;
+            this.RecognizeSchunkBtn.Click += new System.EventHandler(this.RecognizeSchunkBtn_Click);
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // textBox4
+            // ResultsSchunkTxtBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(0, 17);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(188, 215);
-            this.textBox4.TabIndex = 12;
+            this.ResultsSchunkTxtBox.Location = new System.Drawing.Point(0, 17);
+            this.ResultsSchunkTxtBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ResultsSchunkTxtBox.Multiline = true;
+            this.ResultsSchunkTxtBox.Name = "ResultsSchunkTxtBox";
+            this.ResultsSchunkTxtBox.Size = new System.Drawing.Size(188, 215);
+            this.ResultsSchunkTxtBox.TabIndex = 12;
             // 
-            // pictureBox1
+            // ResultSchunkPicBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(532, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 325);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
+            this.ResultSchunkPicBox.Location = new System.Drawing.Point(270, 0);
+            this.ResultSchunkPicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ResultSchunkPicBox.Name = "ResultSchunkPicBox";
+            this.ResultSchunkPicBox.Size = new System.Drawing.Size(150, 325);
+            this.ResultSchunkPicBox.TabIndex = 18;
+            this.ResultSchunkPicBox.TabStop = false;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.RecognizeSchunkBtn);
+            this.groupBox1.Controls.Add(this.ResultsSchunkTxtBox);
             this.groupBox1.Location = new System.Drawing.Point(9, 47);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
@@ -102,9 +104,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(270, 47);
+            this.groupBox2.Controls.Add(this.RecognizeKukaBtn);
+            this.groupBox2.Controls.Add(this.ResultsKukaTxtBox);
+            this.groupBox2.Location = new System.Drawing.Point(424, 47);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -113,191 +115,204 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Определение веса";
             // 
-            // button2
+            // RecognizeKukaBtn
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(0, 236);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(188, 37);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Распознать";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.RecognizeKukaBtn.Enabled = false;
+            this.RecognizeKukaBtn.Location = new System.Drawing.Point(0, 236);
+            this.RecognizeKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.RecognizeKukaBtn.Name = "RecognizeKukaBtn";
+            this.RecognizeKukaBtn.Size = new System.Drawing.Size(188, 37);
+            this.RecognizeKukaBtn.TabIndex = 4;
+            this.RecognizeKukaBtn.Text = "Распознать";
+            this.RecognizeKukaBtn.UseVisualStyleBackColor = true;
+            this.RecognizeKukaBtn.Click += new System.EventHandler(this.RecognizeKukaBtn_Click);
             // 
-            // textBox1
+            // ResultsKukaTxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 17);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 215);
-            this.textBox1.TabIndex = 12;
+            this.ResultsKukaTxtBox.Location = new System.Drawing.Point(0, 17);
+            this.ResultsKukaTxtBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ResultsKukaTxtBox.Multiline = true;
+            this.ResultsKukaTxtBox.Name = "ResultsKukaTxtBox";
+            this.ResultsKukaTxtBox.Size = new System.Drawing.Size(188, 215);
+            this.ResultsKukaTxtBox.TabIndex = 12;
             // 
-            // button3
+            // ClearSchunkBtn
             // 
-            this.button3.Location = new System.Drawing.Point(201, 47);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(65, 49);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Очистить ИНС";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.ClearSchunkBtn.Location = new System.Drawing.Point(201, 47);
+            this.ClearSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ClearSchunkBtn.Name = "ClearSchunkBtn";
+            this.ClearSchunkBtn.Size = new System.Drawing.Size(65, 49);
+            this.ClearSchunkBtn.TabIndex = 27;
+            this.ClearSchunkBtn.Text = "Очистить ИНС";
+            this.ClearSchunkBtn.UseVisualStyleBackColor = true;
+            this.ClearSchunkBtn.Click += new System.EventHandler(this.ClearSchunkBtn_Click);
             // 
-            // button4
+            // ClearKukaBtn
             // 
-            this.button4.Location = new System.Drawing.Point(462, 47);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(65, 49);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "Очистить ИНС";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.ClearKukaBtn.Location = new System.Drawing.Point(616, 47);
+            this.ClearKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ClearKukaBtn.Name = "ClearKukaBtn";
+            this.ClearKukaBtn.Size = new System.Drawing.Size(65, 49);
+            this.ClearKukaBtn.TabIndex = 28;
+            this.ClearKukaBtn.Text = "Очистить ИНС";
+            this.ClearKukaBtn.UseVisualStyleBackColor = true;
+            this.ClearKukaBtn.Click += new System.EventHandler(this.ClearKukaBtn_Click);
             // 
-            // button5
+            // InputsSchunkBtn
             // 
-            this.button5.Location = new System.Drawing.Point(201, 101);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(65, 49);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "Входы";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.InputsSchunkBtn.Location = new System.Drawing.Point(201, 101);
+            this.InputsSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.InputsSchunkBtn.Name = "InputsSchunkBtn";
+            this.InputsSchunkBtn.Size = new System.Drawing.Size(65, 49);
+            this.InputsSchunkBtn.TabIndex = 29;
+            this.InputsSchunkBtn.Text = "Входы";
+            this.InputsSchunkBtn.UseVisualStyleBackColor = true;
+            this.InputsSchunkBtn.Click += new System.EventHandler(this.InputsSchunkBtn_Click);
             // 
-            // button6
+            // OutputsSchunkBtn
             // 
-            this.button6.Location = new System.Drawing.Point(201, 154);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(65, 49);
-            this.button6.TabIndex = 30;
-            this.button6.Text = "Выходы";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.OutputsSchunkBtn.Location = new System.Drawing.Point(201, 154);
+            this.OutputsSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.OutputsSchunkBtn.Name = "OutputsSchunkBtn";
+            this.OutputsSchunkBtn.Size = new System.Drawing.Size(65, 49);
+            this.OutputsSchunkBtn.TabIndex = 30;
+            this.OutputsSchunkBtn.Text = "Выходы";
+            this.OutputsSchunkBtn.UseVisualStyleBackColor = true;
+            this.OutputsSchunkBtn.Click += new System.EventHandler(this.OutputsSchunkBtn_Click);
             // 
-            // button7
+            // NamesSchunkBtn
             // 
-            this.button7.Location = new System.Drawing.Point(201, 208);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(65, 49);
-            this.button7.TabIndex = 31;
-            this.button7.Text = "Названия";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.NamesSchunkBtn.Location = new System.Drawing.Point(201, 208);
+            this.NamesSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.NamesSchunkBtn.Name = "NamesSchunkBtn";
+            this.NamesSchunkBtn.Size = new System.Drawing.Size(65, 49);
+            this.NamesSchunkBtn.TabIndex = 31;
+            this.NamesSchunkBtn.Text = "Названия";
+            this.NamesSchunkBtn.UseVisualStyleBackColor = true;
+            this.NamesSchunkBtn.Click += new System.EventHandler(this.NamesSchunkBtn_Click);
             // 
-            // button8
+            // NamesKukaBtn
             // 
-            this.button8.Location = new System.Drawing.Point(462, 208);
-            this.button8.Margin = new System.Windows.Forms.Padding(2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(65, 49);
-            this.button8.TabIndex = 34;
-            this.button8.Text = "Названия";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.NamesKukaBtn.Location = new System.Drawing.Point(616, 208);
+            this.NamesKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.NamesKukaBtn.Name = "NamesKukaBtn";
+            this.NamesKukaBtn.Size = new System.Drawing.Size(65, 49);
+            this.NamesKukaBtn.TabIndex = 34;
+            this.NamesKukaBtn.Text = "Названия";
+            this.NamesKukaBtn.UseVisualStyleBackColor = true;
+            this.NamesKukaBtn.Click += new System.EventHandler(this.NamesKukaBtn_Click);
             // 
-            // button9
+            // OutputsKukaBtn
             // 
-            this.button9.Location = new System.Drawing.Point(462, 154);
-            this.button9.Margin = new System.Windows.Forms.Padding(2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(65, 49);
-            this.button9.TabIndex = 33;
-            this.button9.Text = "Выходы";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.OutputsKukaBtn.Location = new System.Drawing.Point(616, 154);
+            this.OutputsKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.OutputsKukaBtn.Name = "OutputsKukaBtn";
+            this.OutputsKukaBtn.Size = new System.Drawing.Size(65, 49);
+            this.OutputsKukaBtn.TabIndex = 33;
+            this.OutputsKukaBtn.Text = "Выходы";
+            this.OutputsKukaBtn.UseVisualStyleBackColor = true;
+            this.OutputsKukaBtn.Click += new System.EventHandler(this.OutputsKukaBtn_Click);
             // 
-            // button10
+            // InputsKukaBtn
             // 
-            this.button10.Location = new System.Drawing.Point(462, 101);
-            this.button10.Margin = new System.Windows.Forms.Padding(2);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(65, 49);
-            this.button10.TabIndex = 35;
-            this.button10.Text = "Входы";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.InputsKukaBtn.Location = new System.Drawing.Point(616, 101);
+            this.InputsKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.InputsKukaBtn.Name = "InputsKukaBtn";
+            this.InputsKukaBtn.Size = new System.Drawing.Size(65, 49);
+            this.InputsKukaBtn.TabIndex = 35;
+            this.InputsKukaBtn.Text = "Входы";
+            this.InputsKukaBtn.UseVisualStyleBackColor = true;
+            this.InputsKukaBtn.Click += new System.EventHandler(this.InputsKukaBtn_Click);
             // 
-            // button11
+            // TeachSchunkBtn
             // 
-            this.button11.Location = new System.Drawing.Point(9, 6);
-            this.button11.Margin = new System.Windows.Forms.Padding(2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(257, 37);
-            this.button11.TabIndex = 18;
-            this.button11.Text = "Обучить";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.TeachSchunkBtn.Location = new System.Drawing.Point(9, 6);
+            this.TeachSchunkBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.TeachSchunkBtn.Name = "TeachSchunkBtn";
+            this.TeachSchunkBtn.Size = new System.Drawing.Size(257, 37);
+            this.TeachSchunkBtn.TabIndex = 18;
+            this.TeachSchunkBtn.Text = "Обучить";
+            this.TeachSchunkBtn.UseVisualStyleBackColor = true;
+            this.TeachSchunkBtn.Click += new System.EventHandler(this.TeachSchunkBtn_Click);
             // 
-            // button12
+            // TeachKukaBtn
             // 
-            this.button12.Enabled = false;
-            this.button12.Location = new System.Drawing.Point(270, 6);
-            this.button12.Margin = new System.Windows.Forms.Padding(2);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(257, 37);
-            this.button12.TabIndex = 36;
-            this.button12.Text = "Обучить";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.TeachKukaBtn.Enabled = false;
+            this.TeachKukaBtn.Location = new System.Drawing.Point(424, 6);
+            this.TeachKukaBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.TeachKukaBtn.Name = "TeachKukaBtn";
+            this.TeachKukaBtn.Size = new System.Drawing.Size(257, 37);
+            this.TeachKukaBtn.TabIndex = 36;
+            this.TeachKukaBtn.Text = "Обучить";
+            this.TeachKukaBtn.UseVisualStyleBackColor = true;
+            this.TeachKukaBtn.Click += new System.EventHandler(this.TeachKukaBtn_Click);
             // 
-            // Form1
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(685, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 325);
+            this.pictureBox1.TabIndex = 37;
+            this.pictureBox1.TabStop = false;
+            // 
+            // SchunkANN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 636);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(839, 711);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.TeachKukaBtn);
+            this.Controls.Add(this.TeachSchunkBtn);
+            this.Controls.Add(this.InputsKukaBtn);
+            this.Controls.Add(this.NamesKukaBtn);
+            this.Controls.Add(this.OutputsKukaBtn);
+            this.Controls.Add(this.NamesSchunkBtn);
+            this.Controls.Add(this.OutputsSchunkBtn);
+            this.Controls.Add(this.InputsSchunkBtn);
+            this.Controls.Add(this.ClearKukaBtn);
+            this.Controls.Add(this.ClearSchunkBtn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.ResultSchunkPicBox);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximumSize = new System.Drawing.Size(700, 675);
-            this.MinimumSize = new System.Drawing.Size(700, 675);
-            this.Name = "Form1";
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(855, 750);
+            this.MinimumSize = new System.Drawing.Size(855, 736);
+            this.Name = "SchunkANN";
             this.Text = "SCHUNK ANN Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultSchunkPicBox)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RecognizeSchunkBtn;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox ResultsSchunkTxtBox;
+        private System.Windows.Forms.PictureBox ResultSchunkPicBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button RecognizeKukaBtn;
+        private System.Windows.Forms.TextBox ResultsKukaTxtBox;
+        private System.Windows.Forms.Button ClearSchunkBtn;
+        private System.Windows.Forms.Button ClearKukaBtn;
+        private System.Windows.Forms.Button InputsSchunkBtn;
+        private System.Windows.Forms.Button OutputsSchunkBtn;
+        private System.Windows.Forms.Button NamesSchunkBtn;
+        private System.Windows.Forms.Button NamesKukaBtn;
+        private System.Windows.Forms.Button OutputsKukaBtn;
+        private System.Windows.Forms.Button InputsKukaBtn;
+        private System.Windows.Forms.Button TeachSchunkBtn;
+        private System.Windows.Forms.Button TeachKukaBtn;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

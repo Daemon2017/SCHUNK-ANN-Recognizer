@@ -8,11 +8,10 @@ using System.Drawing;
 
 namespace ANN
 {
-    public partial class Form1 : Form
+    public partial class SchunkANN : Form
     {
-        double[] sensorSampleNew = new double[486];
-
-        double[] sensorSample;
+        double[] sensorSample = new double[486];
+        double[] sensorSampleTemp = new double[486];
 
         void save(string fileName, double[][] variable)
         {
@@ -130,7 +129,7 @@ namespace ANN
         {
             for (int i = i_start; i < i_start + 6; i++)
             {
-                sensorSampleNew[i] = sensorSample[i - corrector];
+                sensorSampleTemp[i] = sensorSample[i - corrector];
             }
         }
 
@@ -149,7 +148,7 @@ namespace ANN
 
             if (type == "sensor")
             {
-                button1.Enabled = false;
+                RecognizeSchunkBtn.Enabled = false;
                 timer1.Start();
             }
 
@@ -165,8 +164,6 @@ namespace ANN
             switch (type)
             {
                 case "sensor":
-                    sensorSample = new double[486 + 7];
-
                     for (int i = 0; i < 486; i++)
                     {
                         sensorSample[i] = double.Parse(massive[i]);
@@ -187,28 +184,14 @@ namespace ANN
                         transformData(i_start, corrector);
                     }
 
-                    sensorSample = sensorSampleNew;
-                    sensorSampleNew = null;
+                    sensorSample = sensorSampleTemp;
+                    sensorSampleTemp = null;
 
                     UpdateFinger();
 
                     for (int i = 0; i < sensorSample.Length; i++)
                     {
                         sensorSample[i] = sensorSample[i] / 4000.0;
-                    }
-                    break;
-
-                case "angles":
-                    double[] anglesSample = new double[7];
-
-                    for (int i = 0; i < 7; i++)
-                    {
-                        anglesSample[i] = double.Parse(massive[i], CultureInfo.InvariantCulture);
-                    }
-
-                    for (int i = 0; i < anglesSample.Length; i++)
-                    {
-                        sensorSample[486 + i] = anglesSample[i] / 95.0;
                     }
                     break;
 

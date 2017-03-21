@@ -7,7 +7,7 @@ using AForge.Neuro;
 
 namespace ANN
 {
-    public partial class Form1 : Form
+    public partial class SchunkANN : Form
     {
         ActivationNetwork tactileNetwork;
 
@@ -25,7 +25,7 @@ namespace ANN
             tactileNetworkOutputNeurons = genLines[0].Length;
 
             tactileNetwork = new ActivationNetwork(new BipolarSigmoidFunction(0.25),
-                                                    493,
+                                                    486,
                                                     250,
                                                     125,
                                                     tactileNetworkOutputNeurons);
@@ -82,10 +82,10 @@ namespace ANN
                     objectsRecognited++;
                 }
 
-                textBox4.Text += NamesTactile[nameNumb].ToString();
-                textBox4.Text += ": ";
-                textBox4.Text += d.ToString("0.##");
-                textBox4.Text += Environment.NewLine;
+                ResultsSchunkTxtBox.Text += NamesTactile[nameNumb].ToString();
+                ResultsSchunkTxtBox.Text += ": ";
+                ResultsSchunkTxtBox.Text += d.ToString("0.##");
+                ResultsSchunkTxtBox.Text += Environment.NewLine;
 
                 nameNumb++;
             }
@@ -101,27 +101,27 @@ namespace ANN
                 {
                     case 0:
                         Bitmap image1 = new Bitmap("1.jpg");
-                        pictureBox1.Image = image1;
+                        ResultSchunkPicBox.Image = image1;
                         break;
                     case 1:
                         Bitmap image2 = new Bitmap("2.jpg");
-                        pictureBox1.Image = image2;
+                        ResultSchunkPicBox.Image = image2;
                         break;
                     case 2:
                         Bitmap image3 = new Bitmap("3.jpg");
-                        pictureBox1.Image = image3;
+                        ResultSchunkPicBox.Image = image3;
                         break;
                     case 3:
                         Bitmap image4 = new Bitmap("4.jpg");
-                        pictureBox1.Image = image4;
+                        ResultSchunkPicBox.Image = image4;
                         break;
                     case 4:
                         Bitmap image5 = new Bitmap("5.jpg");
-                        pictureBox1.Image = image5;
+                        ResultSchunkPicBox.Image = image5;
                         break;
                     case 5:
                         Bitmap image6 = new Bitmap("6.jpg");
-                        pictureBox1.Image = image6;
+                        ResultSchunkPicBox.Image = image6;
                         break;
                 }
 

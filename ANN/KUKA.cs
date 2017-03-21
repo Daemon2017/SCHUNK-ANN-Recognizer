@@ -7,7 +7,7 @@ using AForge.Neuro;
 
 namespace ANN
 {
-    public partial class Form1 : Form
+    public partial class SchunkANN : Form
     {
         ActivationNetwork weightNetwork;
 
@@ -85,10 +85,10 @@ namespace ANN
                     objectsRecognited++;
                 }
 
-                textBox1.Text += d.ToString();
-                textBox1.Text += ": ";
-                textBox1.Text += d.ToString("0.##");
-                textBox1.Text += Environment.NewLine;
+                ResultsKukaTxtBox.Text += d.ToString();
+                ResultsKukaTxtBox.Text += ": ";
+                ResultsKukaTxtBox.Text += d.ToString("0.##");
+                ResultsKukaTxtBox.Text += Environment.NewLine;
 
                 nameNumb++;
             }
