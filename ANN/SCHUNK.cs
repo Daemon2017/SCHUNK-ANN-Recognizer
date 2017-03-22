@@ -100,28 +100,18 @@ namespace ANN
                 switch (indexMaxObjectWeight)
                 {
                     case 0:
-                        Bitmap image1 = new Bitmap("1.jpg");
-                        ResultSchunkPicBox.Image = image1;
                         break;
                     case 1:
-                        Bitmap image2 = new Bitmap("2.jpg");
-                        ResultSchunkPicBox.Image = image2;
                         break;
                     case 2:
-                        Bitmap image3 = new Bitmap("3.jpg");
-                        ResultSchunkPicBox.Image = image3;
                         break;
                     case 3:
-                        Bitmap image4 = new Bitmap("4.jpg");
-                        ResultSchunkPicBox.Image = image4;
                         break;
                     case 4:
-                        Bitmap image5 = new Bitmap("5.jpg");
-                        ResultSchunkPicBox.Image = image5;
                         break;
                     case 5:
-                        Bitmap image6 = new Bitmap("6.jpg");
-                        ResultSchunkPicBox.Image = image6;
+                        break;
+                    case 6:
                         break;
                 }
 

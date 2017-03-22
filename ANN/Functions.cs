@@ -11,7 +11,7 @@ namespace ANN
     public partial class SchunkANN : Form
     {
         double[] sensorSample = new double[486];
-        double[] sensorSampleTemp = new double[486];
+        double[] sensorSampleTemp;
 
         void save(string fileName, double[][] variable)
         {
@@ -168,6 +168,8 @@ namespace ANN
                     {
                         sensorSample[i] = double.Parse(massive[i]);
                     }
+
+                    sensorSampleTemp = new double[486];
 
                     for (int i = 0, i_start = 0, corrector = 0; i < 26; i++, i_start += 18, corrector += 12)
                     {
