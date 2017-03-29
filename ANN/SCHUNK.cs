@@ -123,8 +123,6 @@ namespace ANN
                 {
                     tactileNetworkNotRecognited();
                 }
-
-                createNetworkForTactile();
             }
             else
             {
@@ -209,13 +207,7 @@ namespace ANN
             saveNames("tactile");
 
             tactileNetwork = null;
-
-            createNetworkForTactile();
-            trainTactileNetwork();
-
-            MessageBox.Show("Переобучение завершено!",
-                            "Готово",
-                            MessageBoxButtons.OK);
+            RecognizeSchunkBtn.Enabled = false;
         }
     }
 }
