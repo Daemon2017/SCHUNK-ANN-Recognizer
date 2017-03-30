@@ -129,21 +129,6 @@ namespace ANN
             Process.Start(@"Names_Weight.cfg");
         }
 
-        int time = 5;
-        void timer1_Tick(object sender, EventArgs e)
-        {
-            time--;
-            RecognizeSchunkBtn.Text = time.ToString();
-
-            if (time == 0)
-            {
-                RecognizeSchunkBtn.Text = "Распознать";
-                RecognizeSchunkBtn.Enabled = true;
-                timer1.Stop();
-                time = 5;
-            }
-        }
-
         private void TeachSchunkBtn_Click(object sender, EventArgs e)
         {
             tactileNetwork = null;

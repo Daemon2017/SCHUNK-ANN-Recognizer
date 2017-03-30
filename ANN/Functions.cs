@@ -146,12 +146,6 @@ namespace ANN
                                                          0,
                                                          bytesRead);
 
-            if (type == "sensor")
-            {
-                RecognizeSchunkBtn.Enabled = false;
-                timer1.Start();
-            }
-
             string output_data;
             string[] massive = { "" };
 
