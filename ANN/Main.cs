@@ -39,11 +39,9 @@ namespace ANN
 
             try
             {
-                Receive("sensor", "127.0.0.1", 4446);
+                ReceiveTCP("sensor", "127.0.0.1", 4446);
 
-                TestNetwork();
-
-                //showTactileNetworkResult();
+                TestNetworkForTactile();
             }
             catch (SocketException)
             {
@@ -59,41 +57,14 @@ namespace ANN
 
             try
             {
-                Receive("weight", "172.31.1.147", 30000);
+                ReceiveTCP("weight", "172.31.1.147", 30000);
 
-                ShowWeightNetworkResult();
+                TestNetworkForWeight();
             }
             catch (SocketException)
             {
                 ResultsKukaTxtBox.Text = "Ошибка приёма данных!";
             }
-        }
-
-        void ClearSchunkBtn_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Вы уверены, что хотите удалить все изученные объекты из памяти ИНС?",
-                                         "Очистка памяти ИНС",
-                                         MessageBoxButtons.YesNo,
-                                         MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                Array.Resize(ref inputTactile, 1);
-                inputTactile[0] = new double[486] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-                Save(@"Ideal_Input_Tactile.cfg", inputTactile);
-
-                Array.Resize(ref outputTactile, 1);
-                outputTactile[0] = new double[1] { 1.0 };
-                Save(@"Ideal_Output_Tactile.cfg", outputTactile);
-
-                Array.Resize(ref namesTactile, 1);
-                namesTactile[0] = "Пустота";
-                SaveNames("tactile");
-            }
-
-            tactileNetwork = null;
-
-            RecognizeSchunkBtn.Enabled = false;
         }
 
         void ClearKukaBtn_Click(object sender, EventArgs e)
@@ -107,15 +78,15 @@ namespace ANN
             {
                 Array.Resize(ref inputWeight, 1);
                 inputWeight[0] = new double[2] { 0.07, 1.0 };
-                Save(@"Ideal_Input_Weight.cfg", inputWeight);
+                SaveToFile(@"Ideal_Input_Weight.cfg", inputWeight);
 
                 Array.Resize(ref outputWeight, 1);
                 outputWeight[0] = new double[1] { 1.0 };
-                Save(@"Ideal_Output_Weight.cfg", outputWeight);
+                SaveToFile(@"Ideal_Output_Weight.cfg", outputWeight);
 
                 Array.Resize(ref namesWeight, 1);
                 namesWeight[0] = "Сидр";
-                SaveNames("weight");
+                SaveNamesToFile("weight");
             }
         }
 
@@ -153,20 +124,12 @@ namespace ANN
         {
             net = null;
             PrepareData();
-            CreateNetwork();
-            CreateTrainer();
-            TrainNetwork();
-            SaveNetwork();
-
-            /*
-            tactileNetwork = null;
-            createNetworkForTactile();
-            trainTactileNetwork();
-            */
+            CreateNetworkForTactile();
+            TrainNetworkForTactile();
 
             MessageBox.Show("Обучение завершено!",
-                "Готово",
-                MessageBoxButtons.OK);
+                            "Готово",
+                            MessageBoxButtons.OK);
             RecognizeSchunkBtn.Enabled = true;
         }
 
@@ -175,7 +138,7 @@ namespace ANN
             weightNetwork = null;
 
             CreateNetworkForWeight();
-            TrainWeightNetwork();
+            TrainNetworkForWeight();
 
             MessageBox.Show("Обучение завершено!",
                             "Готово",

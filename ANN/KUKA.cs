@@ -30,16 +30,16 @@ namespace ANN
                                                  weightNetworkOutputNeurons);
         }
 
-        void TrainWeightNetwork()
+        void TrainNetworkForWeight()
         {
-            inputWeight = LoadFile("Ideal_Input_Weight.cfg");
+            inputWeight = LoadFromFile("Ideal_Input_Weight.cfg");
 
             weightNetwork.Randomize();
 
             ResilientBackpropagationLearning learning = new ResilientBackpropagationLearning(weightNetwork);
             learning.LearningRate = 0.5;
 
-            outputWeight = LoadFile("Ideal_Output_Weight.cfg");
+            outputWeight = LoadFromFile("Ideal_Output_Weight.cfg");
 
             bool needToStop = false;
             int iteration = 0;
@@ -62,7 +62,7 @@ namespace ANN
             }
         }
 
-        void ShowWeightNetworkResult()
+        void TestNetworkForWeight()
         {
             int nameNumb = 0;
             double[] listObjectWeightForWeight;
@@ -95,7 +95,7 @@ namespace ANN
 
             double maxObjectWeight = listObjectWeightForWeight.Max();
 
-            LoadNames("weight");
+            LoadNamesFromFile("weight");
 
             if ((maxObjectWeight >= 0.5) && (objectsRecognited == 1))
             {
@@ -108,18 +108,18 @@ namespace ANN
 
                 if (result == DialogResult.No)
                 {
-                    WeightNetworkNotRecognited();
+                    NetworkForWeightNotRecognited();
                 }
 
                 CreateNetworkForWeight();
             }
             else
             {
-                WeightNetworkNotRecognited();
+                NetworkForWeightNotRecognited();
             }
         }
 
-        void WeightNetworkNotRecognited()
+        void NetworkForWeightNotRecognited()
         {
             Namer f = new Namer(namesWeight);
             f.ShowDialog();
@@ -144,14 +144,14 @@ namespace ANN
                         Array.Resize(ref outputWeight[i], outputWeight[i].Length + 1);
                         outputWeight[i][outputWeight.Length - 1] = -1;
                     }
-                    Save(@"Ideal_Output_Weight.cfg", outputWeight);
+                    SaveToFile(@"Ideal_Output_Weight.cfg", outputWeight);
                 }
             }
 
             Array.Resize(ref inputWeight, inputWeight.Length + 1);
             inputWeight[inputWeight.Length - 1] = new double[inputWeight[0].Length];
             inputWeight[inputWeight.Length - 1] = sensorSample;
-            Save(@"Ideal_Input_Weight.cfg", inputWeight);
+            SaveToFile(@"Ideal_Input_Weight.cfg", inputWeight);
 
             if (nameCounter >= namesWeight.Length)
             {
@@ -165,17 +165,17 @@ namespace ANN
                     outputWeight[outputWeight.Length - 1][i] = -1;
                 }
                 outputWeight[outputWeight.Length - 1][outputWeight[outputWeight.Length - 1].Length - 1] = 1;
-                Save(@"Ideal_Output_Weight.cfg", outputWeight);
+                SaveToFile(@"Ideal_Output_Weight.cfg", outputWeight);
             }
 
             namesWeight[namesWeight.Length - 1] = f.newName;
 
-            SaveNames("weight");
+            SaveNamesToFile("weight");
 
             weightNetwork = null;
 
             CreateNetworkForWeight();
-            TrainWeightNetwork();
+            TrainNetworkForWeight();
 
             MessageBox.Show("Переобучение завершено!",
                             "Готово",

@@ -13,7 +13,7 @@ namespace ANN
         double[] sensorSample = new double[486];
         double[] sensorSampleTemp;
 
-        void Save(string fileName, double[][] variable)
+        void SaveToFile(string fileName, double[][] variable)
         {
             using (StreamWriter gg = new StreamWriter(fileName))
             {
@@ -29,7 +29,7 @@ namespace ANN
             }
         }
 
-        void SaveNames(string type)
+        void SaveNamesToFile(string type)
         {
             string WayToFile = "0";
             int Length = 0;
@@ -59,7 +59,31 @@ namespace ANN
             }
         }
 
-        void LoadNames(string type)
+        double[][] LoadFromFile(string fileName)
+        {
+            string[] genLines = File.ReadAllLines(fileName);
+
+            double[][] temp = null;
+
+            Array.Resize(ref temp, genLines.Length);
+
+            for (int i = 0; i < genLines.Length; i++)
+            {
+                string[] genTemp = genLines[i].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+                Array.Resize(ref genTemp, genTemp.Length);
+                Array.Resize(ref temp[i], genTemp.Length);
+
+                for (int j = 0; j < genTemp.Length; j++)
+                {
+                    if (double.TryParse(genTemp[j], out temp[i][j])) { }
+                }
+            }
+
+            return temp;
+        }
+
+        void LoadNamesFromFile(string type)
         {
             if (type == "tactile")
             {
@@ -133,7 +157,7 @@ namespace ANN
             }
         }
 
-        void Receive(string type, string ip, int port)
+        void ReceiveTCP(string type, string ip, int port)
         {
             TcpClient client = new TcpClient(ip,
                                              port);
@@ -198,30 +222,6 @@ namespace ANN
                     sensorSample[0] = sensorSample[0] / 7;
                     break;
             }
-        }
-
-        double[][] LoadFile(string fileName)
-        {
-            string[] genLines = File.ReadAllLines(fileName);
-
-            double[][] temp = null;
-
-            Array.Resize(ref temp, genLines.Length);
-
-            for (int i = 0; i < genLines.Length; i++)
-            {
-                string[] genTemp = genLines[i].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-                Array.Resize(ref genTemp, genTemp.Length);
-                Array.Resize(ref temp[i], genTemp.Length);
-
-                for (int j = 0; j < genTemp.Length; j++)
-                {
-                    if (double.TryParse(genTemp[j], out temp[i][j])) { }
-                }
-            }
-
-            return temp;
         }
     }
 }

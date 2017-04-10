@@ -220,7 +220,7 @@ namespace ANN
             trainingBatchSize = training.Count;
         }
 
-        private void CreateNetwork()
+        private void CreateNetworkForTactile()
         {
             // Создаем сеть
             net = new Net();
@@ -253,7 +253,7 @@ namespace ANN
             net.AddLayer(new SoftmaxLayer(7));
         }
 
-        private void CreateTrainer()
+        private void TrainNetworkForTactile()
         {
             trainer = new AdadeltaTrainer(net)
             {
@@ -262,10 +262,7 @@ namespace ANN
                 // Шаг понижения скорости обучения
                 L2Decay = 0.001,
             };
-        }
 
-        private void TrainNetwork()
-        {
             do
             {
                 var sample = PrepareTrainingSample();
@@ -273,208 +270,11 @@ namespace ANN
             } while (loss > 0.02);
         }
 
-        private void SaveNetwork()
-        {
-            var json = net.ToJSON();
-            File.WriteAllText(@"WriteLines.json", json);
-        }
-
-        private void TestNetwork()
+        private void TestNetworkForTactile()
         {
             testing = Get(sensorSample);
             var testSample = PrepareTestSample();
             int currentPrediction = TestStep(testSample);
-        }
-
-        void CreateNetworkForTactile()
-        {
-            double[][] genLines = LoadFile("Ideal_Output_Tactile.cfg");
-            tactileNetworkOutputNeurons = genLines[0].Length;
-
-            tactileNetwork = new ActivationNetwork(new BipolarSigmoidFunction(0.25),
-                                                    486,
-                                                    250,
-                                                    125,
-                                                    tactileNetworkOutputNeurons);
-        }
-
-        void TrainTactileNetwork()
-        {
-            inputTactile = LoadFile("Ideal_Input_Tactile.cfg");
-            inputWeight = LoadFile("Ideal_Input_Weight.cfg");
-
-            tactileNetwork.Randomize();
-
-            ResilientBackpropagationLearning learning = new ResilientBackpropagationLearning(tactileNetwork);
-            learning.LearningRate = 0.5;
-
-            outputTactile = LoadFile("Ideal_Output_Tactile.cfg");
-            outputWeight = LoadFile("Ideal_Output_Weight.cfg");
-
-            bool needToStop = false;
-            int iteration = 0;
-            while (!needToStop)
-            {
-                double error = learning.RunEpoch(inputTactile, outputTactile);
-
-                if (error == 0)
-                {
-                    break;
-                }
-                else if (iteration < 1000)
-                {
-                    iteration++;
-                }
-                else
-                {
-                    needToStop = true;
-                }
-            }
-        }
-
-        void ShowTactileNetworkResult()
-        {
-            int nameNumb = 0;
-            listObjectWeightForTactile = new double[tactileNetworkOutputNeurons];
-            int objectsRecognited = 0;
-
-            LoadNames("tactile");
-
-            foreach (double d in tactileNetwork.Compute(sensorSample))
-            {
-                listObjectWeightForTactile[nameNumb] = d;
-
-                if (d >= 0.5)
-                {
-                    objectsRecognited++;
-                }
-
-                ResultsSchunkTxtBox.Text += namesTactile[nameNumb].ToString();
-                ResultsSchunkTxtBox.Text += ": ";
-                ResultsSchunkTxtBox.Text += d.ToString("0.##");
-                ResultsSchunkTxtBox.Text += Environment.NewLine;
-
-                nameNumb++;
-            }
-
-            double maxObjectWeight = listObjectWeightForTactile.Max();
-
-            if ((maxObjectWeight >= 0.5) && (objectsRecognited == 1))
-            {
-                int indexMaxObjectWeight = Array.IndexOf(listObjectWeightForTactile,
-                                                         maxObjectWeight);
-
-                switch (indexMaxObjectWeight)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                }
-
-                DialogResult result = MessageBox.Show("Верно ли определен объект?",
-                                                      "Проверка корректности распознавания",
-                                                      MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.No)
-                {
-                    TactileNetworkNotRecognited();
-                }
-            }
-            else
-            {
-                TactileNetworkNotRecognited();
-            }
-        }
-
-        void TactileNetworkNotRecognited()
-        {
-            Namer GetName = new Namer(namesTactile);
-            GetName.ShowDialog();
-
-            if (GetName.KnownObject == false)
-            {
-                Array.Resize(ref namesTactile, namesTactile.Length + 1);
-            }
-
-            int nameCounter = 0;
-            bool stop = false;
-
-            for (int j = 0; j < namesTactile.Length; j++)
-            {
-                if (GetName.newName != namesTactile[j])
-                {
-                    nameCounter++;
-                }
-                else if (GetName.newName == namesTactile[j] && stop == false)
-                {
-                    stop = true;
-
-                    Array.Resize(ref outputTactile, outputTactile.Length + 1);
-                    outputTactile[outputTactile.Length - 1] = new double[outputTactile[0].Length];
-                    outputTactile[outputTactile.Length - 1] = outputTactile[j];
-
-                    if (GetName.KnownObject == false)
-                    {
-                        for (int i = 0; i < outputTactile.Length; i++)
-                        {
-                            Array.Resize(ref outputTactile[i], outputTactile[i].Length + 1);
-                            outputTactile[i][outputTactile.Length - 1] = -1;
-                        }
-                    }
-                    Save(@"Ideal_Output_Tactile.cfg", outputTactile);
-                }
-            }
-
-            Array.Resize(ref inputTactile, inputTactile.Length + 1);
-            inputTactile[inputTactile.Length - 1] = new double[inputTactile[0].Length];
-            inputTactile[inputTactile.Length - 1] = sensorSample;
-            Save(@"Ideal_Input_Tactile.cfg", inputTactile);
-
-            for (int i = 0; i < inputWeight.Length; i++)
-            {
-                Array.Resize(ref inputWeight[i], inputWeight[i].Length + 1);
-                inputWeight[i][inputWeight.Length] = -1;
-            }
-            Save(@"Ideal_Input_Weight.cfg", inputWeight);
-
-            Array.Resize(ref listObjectWeightForTactile, listObjectWeightForTactile.Length + 1);
-            listObjectWeightForTactile[listObjectWeightForTactile.Length - 1] = 1;
-
-            if (nameCounter >= namesTactile.Length)
-            {
-                Array.Resize(ref outputTactile, outputTactile.Length + 1);
-                outputTactile[outputTactile.Length - 1] = new double[outputTactile[0].Length];
-
-                for (int i = 0; i < outputTactile.Length; i++)
-                {
-                    Array.Resize(ref outputTactile[i], outputTactile[i].Length + 1);
-                    outputTactile[i][outputTactile[0].Length - 1] = -1;
-                    outputTactile[outputTactile.Length - 1][i] = -1;
-                }
-                outputTactile[outputTactile.Length - 1][outputTactile[outputTactile.Length - 1].Length - 1] = 1;
-                Save(@"Ideal_Output_Tactile.cfg", outputTactile);
-            }
-
-            if (GetName.KnownObject == false)
-            {
-                namesTactile[namesTactile.Length - 1] = GetName.newName;
-            }
-
-            SaveNames("tactile");
-
-            tactileNetwork = null;
-            RecognizeSchunkBtn.Enabled = false;
         }
     }
 }
