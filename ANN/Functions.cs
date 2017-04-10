@@ -13,7 +13,7 @@ namespace ANN
         double[] sensorSample = new double[486];
         double[] sensorSampleTemp;
 
-        void save(string fileName, double[][] variable)
+        void Save(string fileName, double[][] variable)
         {
             using (StreamWriter gg = new StreamWriter(fileName))
             {
@@ -29,7 +29,7 @@ namespace ANN
             }
         }
 
-        void saveNames(string type)
+        void SaveNames(string type)
         {
             string WayToFile = "0";
             int Length = 0;
@@ -38,14 +38,14 @@ namespace ANN
             if (type == "tactile")
             {
                 WayToFile = @"Names_Tactile.cfg";
-                Length = NamesTactile.Length;
-                ArrayToWrite = NamesTactile;
+                Length = namesTactile.Length;
+                ArrayToWrite = namesTactile;
             }
             else if (type == "weight")
             {
                 WayToFile = @"Names_Weight.cfg";
-                Length = NamesWeight.Length;
-                ArrayToWrite = NamesWeight;
+                Length = namesWeight.Length;
+                ArrayToWrite = namesWeight;
             }
 
             using (StreamWriter gg = new StreamWriter(WayToFile))
@@ -59,28 +59,28 @@ namespace ANN
             }
         }
 
-        void loadNames(string type)
+        void LoadNames(string type)
         {
             if (type == "tactile")
             {
                 string[] kitLines = File.ReadAllLines("Names_Tactile.cfg");
 
-                Array.Resize(ref NamesTactile, kitLines.Length);
+                Array.Resize(ref namesTactile, kitLines.Length);
 
                 for (int i = 0; i < kitLines.Length; i++)
                 {
-                    NamesTactile[i] = kitLines[i];
+                    namesTactile[i] = kitLines[i];
                 }
             }
             else if (type == "weight")
             {
                 string[] kitLines = File.ReadAllLines("Names_Weight.cfg");
 
-                Array.Resize(ref NamesWeight, kitLines.Length);
+                Array.Resize(ref namesWeight, kitLines.Length);
 
                 for (int i = 0; i < kitLines.Length; i++)
                 {
-                    NamesWeight[i] = kitLines[i];
+                    namesWeight[i] = kitLines[i];
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace ANN
             }
         }
 
-        void transformData(int i_start, int corrector)
+        void TransformData(int i_start, int corrector)
         {
             for (int i = i_start; i < i_start + 6; i++)
             {
@@ -133,7 +133,7 @@ namespace ANN
             }
         }
 
-        void receive(string type, string ip, int port)
+        void Receive(string type, string ip, int port)
         {
             TcpClient client = new TcpClient(ip,
                                              port);
@@ -167,17 +167,17 @@ namespace ANN
 
                     for (int i = 0, i_start = 0, corrector = 0; i < 26; i++, i_start += 18, corrector += 12)
                     {
-                        transformData(i_start, corrector);
+                        TransformData(i_start, corrector);
                     }
 
                     for (int i = 0, i_start = 6, corrector = -156; i < 26; i++, i_start += 18, corrector += 12)
                     {
-                        transformData(i_start, corrector);
+                        TransformData(i_start, corrector);
                     }
 
                     for (int i = 0, i_start = 12, corrector = -312; i < 26; i++, i_start += 18, corrector += 12)
                     {
-                        transformData(i_start, corrector);
+                        TransformData(i_start, corrector);
                     }
 
                     sensorSample = sensorSampleTemp;
@@ -200,7 +200,7 @@ namespace ANN
             }
         }
 
-        double[][] load(string fileName)
+        double[][] LoadFile(string fileName)
         {
             string[] genLines = File.ReadAllLines(fileName);
 

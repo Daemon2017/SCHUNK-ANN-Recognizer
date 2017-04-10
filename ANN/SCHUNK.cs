@@ -16,9 +16,9 @@ namespace ANN
     {
         ActivationNetwork tactileNetwork;
 
-        double[][] InputTactile;
-        double[][] OutputTactile;
-        string[] NamesTactile;
+        double[][] inputTactile;
+        double[][] outputTactile;
+        string[] namesTactile;
 
         double[] listObjectWeightForTactile;
 
@@ -102,16 +102,6 @@ namespace ANN
                     var xa = xLossWindow.Items.Average();
                     var xw = wLossWindow.Items.Average();
                     loss = xa + xw;
-
-                    Console.WriteLine("Loss: {0} Train accuracy: {1}% Test accuracy: {2}%",
-                                      loss,
-                                      Math.Round(trainAccWindow.Items.Average() * 100.0, 2),
-                                      Math.Round(valAccWindow.Items.Average() * 100.0, 2));
-
-                    Console.WriteLine("Example seen: {0} Fwd: {1}ms Bckw: {2}ms",
-                                      stepCount,
-                                      Math.Round(trainer.ForwardTime.TotalMilliseconds, 2),
-                                      Math.Round(trainer.BackwardTime.TotalMilliseconds, 2));
                 }
             }
 
@@ -221,11 +211,10 @@ namespace ANN
             return temp;
         }
 
-
         private void PrepareData()
         {
             // Загружаем наборы данных для обучения и проверки
-            training = LoadFile("TrainOut.txt", "Train.txt");
+            training = LoadFile("Ideal_Output_Tactile.cfg", "Ideal_Input_Tactile.cfg");
 
             // Определяем количество имеющихся примеров для обучения
             trainingBatchSize = training.Count;
@@ -277,7 +266,6 @@ namespace ANN
 
         private void TrainNetwork()
         {
-            Console.WriteLine("Convolutional neural network learning...[Press any key to stop]");
             do
             {
                 var sample = PrepareTrainingSample();
@@ -288,7 +276,7 @@ namespace ANN
         private void SaveNetwork()
         {
             var json = net.ToJSON();
-            System.IO.File.WriteAllText(@"WriteLines.json", json);
+            File.WriteAllText(@"WriteLines.json", json);
         }
 
         private void TestNetwork()
@@ -298,9 +286,9 @@ namespace ANN
             int currentPrediction = TestStep(testSample);
         }
 
-        void createNetworkForTactile()
+        void CreateNetworkForTactile()
         {
-            double[][] genLines = load("Ideal_Output_Tactile.cfg");
+            double[][] genLines = LoadFile("Ideal_Output_Tactile.cfg");
             tactileNetworkOutputNeurons = genLines[0].Length;
 
             tactileNetwork = new ActivationNetwork(new BipolarSigmoidFunction(0.25),
@@ -310,24 +298,24 @@ namespace ANN
                                                     tactileNetworkOutputNeurons);
         }
 
-        void trainTactileNetwork()
+        void TrainTactileNetwork()
         {
-            InputTactile = load("Ideal_Input_Tactile.cfg");
-            InputWeight = load("Ideal_Input_Weight.cfg");
+            inputTactile = LoadFile("Ideal_Input_Tactile.cfg");
+            inputWeight = LoadFile("Ideal_Input_Weight.cfg");
 
             tactileNetwork.Randomize();
 
             ResilientBackpropagationLearning learning = new ResilientBackpropagationLearning(tactileNetwork);
             learning.LearningRate = 0.5;
 
-            OutputTactile = load("Ideal_Output_Tactile.cfg");
-            OutputWeight = load("Ideal_Output_Weight.cfg");
+            outputTactile = LoadFile("Ideal_Output_Tactile.cfg");
+            outputWeight = LoadFile("Ideal_Output_Weight.cfg");
 
             bool needToStop = false;
             int iteration = 0;
             while (!needToStop)
             {
-                double error = learning.RunEpoch(InputTactile, OutputTactile);
+                double error = learning.RunEpoch(inputTactile, outputTactile);
 
                 if (error == 0)
                 {
@@ -344,13 +332,13 @@ namespace ANN
             }
         }
 
-        void showTactileNetworkResult()
+        void ShowTactileNetworkResult()
         {
             int nameNumb = 0;
             listObjectWeightForTactile = new double[tactileNetworkOutputNeurons];
             int objectsRecognited = 0;
 
-            loadNames("tactile");
+            LoadNames("tactile");
 
             foreach (double d in tactileNetwork.Compute(sensorSample))
             {
@@ -361,7 +349,7 @@ namespace ANN
                     objectsRecognited++;
                 }
 
-                ResultsSchunkTxtBox.Text += NamesTactile[nameNumb].ToString();
+                ResultsSchunkTxtBox.Text += namesTactile[nameNumb].ToString();
                 ResultsSchunkTxtBox.Text += ": ";
                 ResultsSchunkTxtBox.Text += d.ToString("0.##");
                 ResultsSchunkTxtBox.Text += Environment.NewLine;
@@ -400,90 +388,90 @@ namespace ANN
 
                 if (result == DialogResult.No)
                 {
-                    tactileNetworkNotRecognited();
+                    TactileNetworkNotRecognited();
                 }
             }
             else
             {
-                tactileNetworkNotRecognited();
+                TactileNetworkNotRecognited();
             }
         }
 
-        void tactileNetworkNotRecognited()
+        void TactileNetworkNotRecognited()
         {
-            Namer GetName = new Namer(NamesTactile);
+            Namer GetName = new Namer(namesTactile);
             GetName.ShowDialog();
 
             if (GetName.KnownObject == false)
             {
-                Array.Resize(ref NamesTactile, NamesTactile.Length + 1);
+                Array.Resize(ref namesTactile, namesTactile.Length + 1);
             }
 
             int nameCounter = 0;
             bool stop = false;
 
-            for (int j = 0; j < NamesTactile.Length; j++)
+            for (int j = 0; j < namesTactile.Length; j++)
             {
-                if (GetName.newName != NamesTactile[j])
+                if (GetName.newName != namesTactile[j])
                 {
                     nameCounter++;
                 }
-                else if (GetName.newName == NamesTactile[j] && stop == false)
+                else if (GetName.newName == namesTactile[j] && stop == false)
                 {
                     stop = true;
 
-                    Array.Resize(ref OutputTactile, OutputTactile.Length + 1);
-                    OutputTactile[OutputTactile.Length - 1] = new double[OutputTactile[0].Length];
-                    OutputTactile[OutputTactile.Length - 1] = OutputTactile[j];
+                    Array.Resize(ref outputTactile, outputTactile.Length + 1);
+                    outputTactile[outputTactile.Length - 1] = new double[outputTactile[0].Length];
+                    outputTactile[outputTactile.Length - 1] = outputTactile[j];
 
                     if (GetName.KnownObject == false)
                     {
-                        for (int i = 0; i < OutputTactile.Length; i++)
+                        for (int i = 0; i < outputTactile.Length; i++)
                         {
-                            Array.Resize(ref OutputTactile[i], OutputTactile[i].Length + 1);
-                            OutputTactile[i][OutputTactile.Length - 1] = -1;
+                            Array.Resize(ref outputTactile[i], outputTactile[i].Length + 1);
+                            outputTactile[i][outputTactile.Length - 1] = -1;
                         }
                     }
-                    save(@"Ideal_Output_Tactile.cfg", OutputTactile);
+                    Save(@"Ideal_Output_Tactile.cfg", outputTactile);
                 }
             }
 
-            Array.Resize(ref InputTactile, InputTactile.Length + 1);
-            InputTactile[InputTactile.Length - 1] = new double[InputTactile[0].Length];
-            InputTactile[InputTactile.Length - 1] = sensorSample;
-            save(@"Ideal_Input_Tactile.cfg", InputTactile);
+            Array.Resize(ref inputTactile, inputTactile.Length + 1);
+            inputTactile[inputTactile.Length - 1] = new double[inputTactile[0].Length];
+            inputTactile[inputTactile.Length - 1] = sensorSample;
+            Save(@"Ideal_Input_Tactile.cfg", inputTactile);
 
-            for (int i = 0; i < InputWeight.Length; i++)
+            for (int i = 0; i < inputWeight.Length; i++)
             {
-                Array.Resize(ref InputWeight[i], InputWeight[i].Length + 1);
-                InputWeight[i][InputWeight.Length] = -1;
+                Array.Resize(ref inputWeight[i], inputWeight[i].Length + 1);
+                inputWeight[i][inputWeight.Length] = -1;
             }
-            save(@"Ideal_Input_Weight.cfg", InputWeight);
+            Save(@"Ideal_Input_Weight.cfg", inputWeight);
 
             Array.Resize(ref listObjectWeightForTactile, listObjectWeightForTactile.Length + 1);
             listObjectWeightForTactile[listObjectWeightForTactile.Length - 1] = 1;
 
-            if (nameCounter >= NamesTactile.Length)
+            if (nameCounter >= namesTactile.Length)
             {
-                Array.Resize(ref OutputTactile, OutputTactile.Length + 1);
-                OutputTactile[OutputTactile.Length - 1] = new double[OutputTactile[0].Length];
+                Array.Resize(ref outputTactile, outputTactile.Length + 1);
+                outputTactile[outputTactile.Length - 1] = new double[outputTactile[0].Length];
 
-                for (int i = 0; i < OutputTactile.Length; i++)
+                for (int i = 0; i < outputTactile.Length; i++)
                 {
-                    Array.Resize(ref OutputTactile[i], OutputTactile[i].Length + 1);
-                    OutputTactile[i][OutputTactile[0].Length - 1] = -1;
-                    OutputTactile[OutputTactile.Length - 1][i] = -1;
+                    Array.Resize(ref outputTactile[i], outputTactile[i].Length + 1);
+                    outputTactile[i][outputTactile[0].Length - 1] = -1;
+                    outputTactile[outputTactile.Length - 1][i] = -1;
                 }
-                OutputTactile[OutputTactile.Length - 1][OutputTactile[OutputTactile.Length - 1].Length - 1] = 1;
-                save(@"Ideal_Output_Tactile.cfg", OutputTactile);
+                outputTactile[outputTactile.Length - 1][outputTactile[outputTactile.Length - 1].Length - 1] = 1;
+                Save(@"Ideal_Output_Tactile.cfg", outputTactile);
             }
 
             if (GetName.KnownObject == false)
             {
-                NamesTactile[NamesTactile.Length - 1] = GetName.newName;
+                namesTactile[namesTactile.Length - 1] = GetName.newName;
             }
 
-            saveNames("tactile");
+            SaveNames("tactile");
 
             tactileNetwork = null;
             RecognizeSchunkBtn.Enabled = false;

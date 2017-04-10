@@ -11,13 +11,13 @@ namespace ANN
     {
         ActivationNetwork weightNetwork;
 
-        double[][] InputWeight;
-        double[][] OutputWeight;
-        string[] NamesWeight;
+        double[][] inputWeight;
+        double[][] outputWeight;
+        string[] namesWeight;
 
         int weightNetworkOutputNeurons = 0;
 
-        void createNetworkForWeight()
+        void CreateNetworkForWeight()
         {
             string[] numLines = File.ReadAllLines("Ideal_Output_Tactile.cfg");
             int weightNetworkInputNeurons = numLines.Length + 1;
@@ -30,22 +30,22 @@ namespace ANN
                                                  weightNetworkOutputNeurons);
         }
 
-        void trainWeightNetwork()
+        void TrainWeightNetwork()
         {
-            InputWeight = load("Ideal_Input_Weight.cfg");
+            inputWeight = LoadFile("Ideal_Input_Weight.cfg");
 
             weightNetwork.Randomize();
 
             ResilientBackpropagationLearning learning = new ResilientBackpropagationLearning(weightNetwork);
             learning.LearningRate = 0.5;
 
-            OutputWeight = load("Ideal_Output_Weight.cfg");
+            outputWeight = LoadFile("Ideal_Output_Weight.cfg");
 
             bool needToStop = false;
             int iteration = 0;
             while (!needToStop)
             {
-                double error = learning.RunEpoch(InputWeight, OutputWeight);
+                double error = learning.RunEpoch(inputWeight, outputWeight);
 
                 if (error == 0)
                 {
@@ -62,7 +62,7 @@ namespace ANN
             }
         }
 
-        void showWeightNetworkResult()
+        void ShowWeightNetworkResult()
         {
             int nameNumb = 0;
             double[] listObjectWeightForWeight;
@@ -95,7 +95,7 @@ namespace ANN
 
             double maxObjectWeight = listObjectWeightForWeight.Max();
 
-            loadNames("weight");
+            LoadNames("weight");
 
             if ((maxObjectWeight >= 0.5) && (objectsRecognited == 1))
             {
@@ -108,74 +108,74 @@ namespace ANN
 
                 if (result == DialogResult.No)
                 {
-                    weightNetworkNotRecognited();
+                    WeightNetworkNotRecognited();
                 }
 
-                createNetworkForWeight();
+                CreateNetworkForWeight();
             }
             else
             {
-                weightNetworkNotRecognited();
+                WeightNetworkNotRecognited();
             }
         }
 
-        void weightNetworkNotRecognited()
+        void WeightNetworkNotRecognited()
         {
-            Namer f = new Namer(NamesWeight);
+            Namer f = new Namer(namesWeight);
             f.ShowDialog();
 
-            Array.Resize(ref NamesWeight, NamesWeight.Length + 1);
+            Array.Resize(ref namesWeight, namesWeight.Length + 1);
             int nameCounter = 0;
 
-            for (int j = 0; j < NamesWeight.Length; j++)
+            for (int j = 0; j < namesWeight.Length; j++)
             {
-                if (f.newName != NamesWeight[j])
+                if (f.newName != namesWeight[j])
                 {
                     nameCounter++;
                 }
                 else
                 {
-                    Array.Resize(ref OutputWeight, OutputWeight.Length + 1);
-                    OutputWeight[OutputWeight.Length - 1] = new double[OutputWeight[0].Length];
-                    OutputWeight[OutputWeight.Length - 1] = OutputWeight[j];
+                    Array.Resize(ref outputWeight, outputWeight.Length + 1);
+                    outputWeight[outputWeight.Length - 1] = new double[outputWeight[0].Length];
+                    outputWeight[outputWeight.Length - 1] = outputWeight[j];
 
-                    for (int i = 0; i < OutputWeight.Length; i++)
+                    for (int i = 0; i < outputWeight.Length; i++)
                     {
-                        Array.Resize(ref OutputWeight[i], OutputWeight[i].Length + 1);
-                        OutputWeight[i][OutputWeight.Length - 1] = -1;
+                        Array.Resize(ref outputWeight[i], outputWeight[i].Length + 1);
+                        outputWeight[i][outputWeight.Length - 1] = -1;
                     }
-                    save(@"Ideal_Output_Weight.cfg", OutputWeight);
+                    Save(@"Ideal_Output_Weight.cfg", outputWeight);
                 }
             }
 
-            Array.Resize(ref InputWeight, InputWeight.Length + 1);
-            InputWeight[InputWeight.Length - 1] = new double[InputWeight[0].Length];
-            InputWeight[InputWeight.Length - 1] = sensorSample;
-            save(@"Ideal_Input_Weight.cfg", InputWeight);
+            Array.Resize(ref inputWeight, inputWeight.Length + 1);
+            inputWeight[inputWeight.Length - 1] = new double[inputWeight[0].Length];
+            inputWeight[inputWeight.Length - 1] = sensorSample;
+            Save(@"Ideal_Input_Weight.cfg", inputWeight);
 
-            if (nameCounter >= NamesWeight.Length)
+            if (nameCounter >= namesWeight.Length)
             {
-                Array.Resize(ref OutputWeight, OutputWeight.Length + 1);
-                OutputWeight[OutputWeight.Length - 1] = new double[OutputWeight[0].Length];
+                Array.Resize(ref outputWeight, outputWeight.Length + 1);
+                outputWeight[outputWeight.Length - 1] = new double[outputWeight[0].Length];
 
-                for (int i = 0; i < OutputWeight.Length; i++)
+                for (int i = 0; i < outputWeight.Length; i++)
                 {
-                    Array.Resize(ref OutputWeight[i], OutputWeight[i].Length + 1);
-                    OutputWeight[i][OutputWeight.Length - 1] = -1;
-                    OutputWeight[OutputWeight.Length - 1][i] = -1;
+                    Array.Resize(ref outputWeight[i], outputWeight[i].Length + 1);
+                    outputWeight[i][outputWeight.Length - 1] = -1;
+                    outputWeight[outputWeight.Length - 1][i] = -1;
                 }
-                OutputWeight[OutputWeight.Length - 1][OutputWeight[OutputWeight.Length - 1].Length - 1] = 1;
-                save(@"Ideal_Output_Weight.cfg", OutputWeight);
+                outputWeight[outputWeight.Length - 1][outputWeight[outputWeight.Length - 1].Length - 1] = 1;
+                Save(@"Ideal_Output_Weight.cfg", outputWeight);
             }
 
-            NamesWeight[NamesWeight.Length - 1] = f.newName;
+            namesWeight[namesWeight.Length - 1] = f.newName;
 
-            saveNames("weight");
+            SaveNames("weight");
 
             weightNetwork = null;
 
-            createNetworkForWeight();
-            trainWeightNetwork();
+            CreateNetworkForWeight();
+            TrainWeightNetwork();
 
             MessageBox.Show("Переобучение завершено!",
                             "Готово",
