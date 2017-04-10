@@ -7,7 +7,7 @@ using AForge.Neuro;
 
 namespace ANN
 {
-    public partial class SchunkANN : Form
+    public partial class SchunkANN
     {
         ActivationNetwork weightNetwork;
 

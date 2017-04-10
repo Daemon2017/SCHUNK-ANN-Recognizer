@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace ANN
 {
-    public partial class SchunkANN : Form
+    public partial class SchunkANN
     {
         double[] sensorSample = new double[486];
         double[] sensorSampleTemp;

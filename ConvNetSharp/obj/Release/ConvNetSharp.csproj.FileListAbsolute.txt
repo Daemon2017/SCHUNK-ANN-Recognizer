@@ -1,0 +1,6 @@
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\bin\Release\ConvNetSharp.dll.config
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\bin\Release\ConvNetSharp.dll
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\bin\Release\ConvNetSharp.pdb
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\obj\Release\ConvNetSharp.csprojResolveAssemblyReference.cache
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\obj\Release\ConvNetSharp.dll
+C:\Users\Daemon\Downloads\SCHUNK-ANN-Recognizer\ConvNetSharp\obj\Release\ConvNetSharp.pdb

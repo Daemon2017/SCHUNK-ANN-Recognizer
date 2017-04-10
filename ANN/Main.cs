@@ -2,11 +2,29 @@
 using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.Collections.Generic;
+using ConvNetSharp;
+using ConvNetSharp.Training;
 
 namespace ANN
 {
     public partial class SchunkANN : Form
     {
+        private int trainingBatchSize;
+
+        private Net net;
+        private AdadeltaTrainer trainer;
+
+        private List<Entry> training;
+        private List<Entry> testing;
+
+        // Ширина изображения
+        int inputWidth = 18;
+        // Высота изображения
+        int inputHeight = 27;
+        // Число каналов у изображения
+        int inputDepth = 1;
+
         public PictureBox[] Finger = new PictureBox[486];
 
         public SchunkANN()
@@ -23,7 +41,9 @@ namespace ANN
             {
                 receive("sensor", "127.0.0.1", 4446);
 
-                showTactileNetworkResult();
+                TestNetwork();
+
+                //showTactileNetworkResult();
             }
             catch (SocketException)
             {
@@ -131,15 +151,22 @@ namespace ANN
 
         private void TeachSchunkBtn_Click(object sender, EventArgs e)
         {
-            tactileNetwork = null;
+            net = null;
+            PrepareData();
+            CreateNetwork();
+            CreateTrainer();
+            TrainNetwork();
+            SaveNetwork();
 
+            /*
+            tactileNetwork = null;
             createNetworkForTactile();
             trainTactileNetwork();
+            */
 
             MessageBox.Show("Обучение завершено!",
-                            "Готово",
-                            MessageBoxButtons.OK);
-
+                "Готово",
+                MessageBoxButtons.OK);
             RecognizeSchunkBtn.Enabled = true;
         }
 
