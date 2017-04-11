@@ -96,6 +96,9 @@ namespace ANN
                     var xa = xLossWindow.Items.Average();
                     var xw = wLossWindow.Items.Average();
                     loss = xa + xw;
+
+                    toolStripStatusLabel1.Text = string.Format("Потери: {0}", loss);
+                    statusStrip1.Refresh();
                 }
             }
 

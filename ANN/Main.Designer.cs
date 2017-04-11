@@ -54,10 +54,12 @@
             this.inputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.namesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ResultSchunkPicBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,6 +127,8 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 372);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(859, 22);
@@ -230,7 +234,7 @@
             // trainingToolStripMenuItem1
             // 
             this.trainingToolStripMenuItem1.Name = "trainingToolStripMenuItem1";
-            this.trainingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.trainingToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.trainingToolStripMenuItem1.Text = "Обучение";
             this.trainingToolStripMenuItem1.Click += new System.EventHandler(this.trainingToolStripMenuItem1_Click);
             // 
@@ -238,21 +242,21 @@
             // 
             this.testingToolStripMenuItem1.Enabled = false;
             this.testingToolStripMenuItem1.Name = "testingToolStripMenuItem1";
-            this.testingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.testingToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.testingToolStripMenuItem1.Text = "Проверка";
             this.testingToolStripMenuItem1.Click += new System.EventHandler(this.testingToolStripMenuItem1_Click);
             // 
             // openToolStripMenuItem1
             // 
             this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            this.openToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.openToolStripMenuItem1.Text = "Открыть";
             this.openToolStripMenuItem1.Click += new System.EventHandler(this.openToolStripMenuItem1_Click);
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.saveToolStripMenuItem1.Text = "Сохранить";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
@@ -263,7 +267,7 @@
             this.outputsToolStripMenuItem,
             this.namesToolStripMenuItem});
             this.showToolStripMenuItem1.Name = "showToolStripMenuItem1";
-            this.showToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.showToolStripMenuItem1.Text = "Просмотр";
             // 
             // inputsToolStripMenuItem
@@ -287,6 +291,12 @@
             this.namesToolStripMenuItem.Text = "Названия";
             this.namesToolStripMenuItem.Click += new System.EventHandler(this.namesToolStripMenuItem_Click);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(54, 17);
+            this.toolStripStatusLabel1.Text = "Потери: ";
+            // 
             // SchunkANN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,6 +319,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -343,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem inputsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem outputsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem namesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

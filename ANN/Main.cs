@@ -80,6 +80,9 @@ namespace ANN
             var json_temp = File.ReadAllLines("NetworkStructure.json");
             string json = string.Join("", json_temp);
             net = SerializationExtensions.FromJSON(json);
+
+            testingToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
