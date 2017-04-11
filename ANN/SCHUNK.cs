@@ -218,6 +218,9 @@ namespace ANN
 
             // Определяем количество имеющихся примеров для обучения
             trainingBatchSize = training.Count;
+
+            //Загружаем названия объектов
+            names = File.ReadAllLines("Names_Tactile.cfg");
         }
 
         private void CreateNetworkForTactile()
@@ -249,8 +252,8 @@ namespace ANN
                 Stride = 3
             });
 
-            net.AddLayer(new FullyConnLayer(7));
-            net.AddLayer(new SoftmaxLayer(7));
+            net.AddLayer(new FullyConnLayer(names.Length));
+            net.AddLayer(new SoftmaxLayer(names.Length));
         }
 
         private void TrainNetworkForTactile()
@@ -268,6 +271,9 @@ namespace ANN
                 var sample = PrepareTrainingSample();
                 TrainingStep(sample);
             } while (loss > 0.02);
+
+            TeachSchunkBtn.Text = "Обучено";
+            TeachSchunkBtn.Enabled = false;
         }
 
         private void TestNetworkForTactile()
@@ -275,6 +281,26 @@ namespace ANN
             testing = Get(sensorSample);
             var testSample = PrepareTestSample();
             int currentPrediction = TestStep(testSample);
+
+            ResultsSchunkTxtBox.Text = currentPrediction.ToString();
+
+            switch(currentPrediction)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+            }
         }
     }
 }

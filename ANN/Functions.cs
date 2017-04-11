@@ -111,9 +111,9 @@ namespace ANN
 
         void DrawFinger()
         {
-            int StartCoordX = 9;
+            int StartCoordX = 844;
             int PictureNumber = 0;
-            int StartCoordY = 425;
+            int StartCoordY = 9;
 
             int SizeX = 10,
                 SizeY = 10;
@@ -143,7 +143,6 @@ namespace ANN
                 double ColorNormalization = sensorSample[i] * 255 / 4000;
 
                 Finger[i].BackColor = Color.FromArgb(0, Convert.ToInt32(ColorNormalization), 0); ;
-
                 Finger[i].Invalidate();
                 Finger[i].Update();
             }

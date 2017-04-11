@@ -18,6 +18,8 @@ namespace ANN
         private List<Entry> training;
         private List<Entry> testing;
 
+        string[] names;
+
         // Ширина изображения
         int inputWidth = 18;
         // Высота изображения
@@ -30,6 +32,64 @@ namespace ANN
         public SchunkANN()
         {
             InitializeComponent();
+        }
+
+        void InputsSchunkBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Ideal_Input_Tactile.cfg");
+        }
+
+        private void InputsKukaBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Ideal_Input_Weight.cfg");
+        }
+
+        void OutputsSchunkBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Ideal_Output_Tactile.cfg");
+        }
+
+        void OutputsKukaBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Ideal_Output_Weight.cfg");
+        }
+
+        void NamesSchunkBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Names_Tactile.cfg");
+        }
+
+        void NamesKukaBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"Names_Weight.cfg");
+        }
+
+        private void TeachSchunkBtn_Click(object sender, EventArgs e)
+        {
+            net = null;
+
+            PrepareData();
+            CreateNetworkForTactile();
+            TrainNetworkForTactile();
+
+            MessageBox.Show("Обучение завершено!",
+                            "Готово",
+                            MessageBoxButtons.OK);
+            RecognizeSchunkBtn.Enabled = true;
+        }
+
+        private void TeachKukaBtn_Click(object sender, EventArgs e)
+        {
+            weightNetwork = null;
+
+            CreateNetworkForWeight();
+            TrainNetworkForWeight();
+
+            MessageBox.Show("Обучение завершено!",
+                            "Готово",
+                            MessageBoxButtons.OK);
+
+            RecognizeKukaBtn.Enabled = true;
         }
 
         void RecognizeSchunkBtn_Click(object sender, EventArgs e)
@@ -88,63 +148,6 @@ namespace ANN
                 namesWeight[0] = "Сидр";
                 SaveNamesToFile("weight");
             }
-        }
-
-        void InputsSchunkBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Ideal_Input_Tactile.cfg");
-        }
-
-        private void InputsKukaBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Ideal_Input_Weight.cfg");
-        }
-
-        void OutputsSchunkBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Ideal_Output_Tactile.cfg");
-        }
-
-        void OutputsKukaBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Ideal_Output_Weight.cfg");
-        }
-
-        void NamesSchunkBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Names_Tactile.cfg");
-        }
-
-        void NamesKukaBtn_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"Names_Weight.cfg");
-        }
-
-        private void TeachSchunkBtn_Click(object sender, EventArgs e)
-        {
-            net = null;
-            PrepareData();
-            CreateNetworkForTactile();
-            TrainNetworkForTactile();
-
-            MessageBox.Show("Обучение завершено!",
-                            "Готово",
-                            MessageBoxButtons.OK);
-            RecognizeSchunkBtn.Enabled = true;
-        }
-
-        private void TeachKukaBtn_Click(object sender, EventArgs e)
-        {
-            weightNetwork = null;
-
-            CreateNetworkForWeight();
-            TrainNetworkForWeight();
-
-            MessageBox.Show("Обучение завершено!",
-                            "Готово",
-                            MessageBoxButtons.OK);
-
-            RecognizeKukaBtn.Enabled = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
