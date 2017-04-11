@@ -14,15 +14,9 @@ namespace ANN
 {
     public partial class SchunkANN
     {
-        ActivationNetwork tactileNetwork;
-
-        double[][] inputTactile;
-        double[][] outputTactile;
         string[] namesTactile;
 
         double[] listObjectWeightForTactile;
-
-        int tactileNetworkOutputNeurons = 0;
 
         // Храним последние оценки качества - на обучающей и пробной выборке
         private readonly CircularBuffer<double> trainAccWindow = new CircularBuffer<double>(100);

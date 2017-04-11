@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using ConvNetSharp;
 using ConvNetSharp.Training;
+using ConvNetSharp.Serialization;
+using System.IO;
 
 namespace ANN
 {
@@ -48,6 +50,7 @@ namespace ANN
             TrainNetworkForTactile(0.02);
 
             testingToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
 
             MessageBox.Show("Обучение завершено!",
                             "Готово",
@@ -73,12 +76,16 @@ namespace ANN
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            net = null;
+            var json_temp = File.ReadAllLines("NetworkStructure.json");
+            string json = string.Join("", json_temp);
+            net = SerializationExtensions.FromJSON(json);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var json = net.ToJSON();
+            File.WriteAllText(@"NetworkStructure.json", json);
         }
 
         private void showInputsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -124,6 +131,16 @@ namespace ANN
             {
                 ResultsKukaTxtBox.Text = "Ошибка приёма данных!";
             }
+        }
+
+        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void inputsToolStripMenuItem_Click(object sender, EventArgs e)
