@@ -256,7 +256,7 @@ namespace ANN
             net.AddLayer(new SoftmaxLayer(names.Length));
         }
 
-        private void TrainNetworkForTactile()
+        private void TrainNetworkForTactile(double availableLoss)
         {
             trainer = new AdadeltaTrainer(net)
             {
@@ -270,10 +270,7 @@ namespace ANN
             {
                 var sample = PrepareTrainingSample();
                 TrainingStep(sample);
-            } while (loss > 0.02);
-
-            TeachSchunkBtn.Text = "Обучено";
-            TeachSchunkBtn.Enabled = false;
+            } while (loss > availableLoss);
         }
 
         private void TestNetworkForTactile()
