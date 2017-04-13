@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Linq;
-using AForge.Neuro.Learning;
-using AForge.Neuro;
 using System.Collections.Generic;
 using System.IO;
 using ConvNetSharp;
 using ConvNetSharp.Layers;
 using ConvNetSharp.Training;
-using ConvNetSharp.Serialization;
 
 namespace ANN
 {
@@ -227,14 +223,20 @@ namespace ANN
 
             net.AddLayer(new InputLayer(inputWidth, inputHeight, inputDepth));
 
+            // Ширина, высота и глубина фильтра
             net.AddLayer(new ConvLayer(5, 5, 8)
             {
+                // Шаг скольжения свертки
                 Stride = 1,
+                // Заполнение краев нулями
                 Pad = 2
             });
             net.AddLayer(new ReluLayer());
+
+            // Ширина и высота окна уплотнения
             net.AddLayer(new PoolLayer(2, 2)
             {
+                // Сдвиг
                 Stride = 2
             });
 
@@ -244,6 +246,7 @@ namespace ANN
                 Pad = 2
             });
             net.AddLayer(new ReluLayer());
+
             net.AddLayer(new PoolLayer(3, 3)
             {
                 Stride = 3
@@ -276,7 +279,7 @@ namespace ANN
             var testSample = PrepareTestSample();
             int currentPrediction = TestStep(testSample);
 
-            ResultsSchunkTxtBox.Text = currentPrediction.ToString();
+            ResultsSchunkTxtBox.Text = names[currentPrediction];
 
             switch(currentPrediction)
             {

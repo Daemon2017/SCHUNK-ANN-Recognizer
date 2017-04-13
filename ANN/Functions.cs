@@ -111,7 +111,7 @@ namespace ANN
 
         void DrawFinger()
         {
-            int StartCoordX = 630;
+            int StartCoordX = 850;
             int PictureNumber = 0;
             int StartCoordY = 27;
 
