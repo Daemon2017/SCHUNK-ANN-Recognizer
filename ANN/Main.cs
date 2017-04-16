@@ -47,7 +47,7 @@ namespace ANN
 
             PrepareData();
             CreateNetworkForTactile();
-            TrainNetworkForTactile(0.02);
+            TrainNetworkForTactile(0.01);
 
             testingToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;

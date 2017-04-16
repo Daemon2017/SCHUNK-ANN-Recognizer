@@ -224,12 +224,12 @@ namespace ANN
             net.AddLayer(new InputLayer(inputWidth, inputHeight, inputDepth));
 
             // Ширина и высота рецептивного поля, количество фильтров
-            net.AddLayer(new ConvLayer(5, 5, 8)
+            net.AddLayer(new ConvLayer(3, 3, 8)
             {
                 // Шаг скольжения свертки
                 Stride = 1,
                 // Заполнение краев нулями
-                Pad = 2
+                Pad = 1
             });
             net.AddLayer(new ReluLayer());
 
@@ -240,10 +240,10 @@ namespace ANN
                 Stride = 2
             });
 
-            net.AddLayer(new ConvLayer(5, 5, 16)
+            net.AddLayer(new ConvLayer(3, 3, 16)
             {
                 Stride = 1,
-                Pad = 2
+                Pad = 1
             });
             net.AddLayer(new ReluLayer());
 
